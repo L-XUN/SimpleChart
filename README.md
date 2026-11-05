@@ -1,6 +1,7 @@
 # simplechart
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/L-XUN/SimpleChart/actions/workflows/ci.yml/badge.svg)](https://github.com/L-XUN/SimpleChart/actions/workflows/ci.yml)
 
 把**流程 / 层级 / 交互顺序 / 数据关系 / 系统分层**画成一张 PNG 图。
 

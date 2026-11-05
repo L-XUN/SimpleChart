@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Render every example
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      # 渲染器的中文字体候选里有 /usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc，
+      # 装了这个包才会走到"精确量字宽"那条路；不装则退化成估算字宽（仍能过，但测不到真实排版）
+      - name: Install CJK fonts
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+
+      # render.mjs 出图后会跑几何 + 像素自检，任何一项 FAIL 就以退出码 1 结束，
+      # 所以这一步等价于"所有示例都必须 PASS"
+      - name: Render all examples
+        run: |
+          set -e
+          for spec in examples/*/spec.json; do
+            name="$(basename "$(dirname "$spec")")"
+            echo "::group::$name"
+            node scripts/render.mjs "$spec" "/tmp/$name.png"
+            echo "::endgroup::"
+          done
