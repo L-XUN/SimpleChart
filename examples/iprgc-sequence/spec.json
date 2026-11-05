@@ -1,0 +1,20 @@
+{
+  "type": "sequence",
+  "title": "蓝光经 ipRGC 调控昼夜节律（机制时序）",
+  "actors": [
+    { "id": "light", "name": "环境光" },
+    { "id": "iprgc", "name": "ipRGC\n（黑视蛋白）" },
+    { "id": "scn", "name": "SCN\n视交叉上核" },
+    { "id": "pineal", "name": "松果体" },
+    { "id": "body", "name": "外周组织" }
+  ],
+  "messages": [
+    { "from": "light", "to": "iprgc", "label": "蓝光 ~480nm" },
+    { "from": "iprgc", "to": "iprgc", "label": "光敏分子构象变化" },
+    { "from": "iprgc", "to": "scn", "label": "谷氨酸 / PACAP" },
+    { "from": "scn", "to": "pineal", "label": "节律信号（夜间）" },
+    { "from": "pineal", "to": "body", "label": "褪黑素释放" },
+    { "from": "body", "to": "pineal", "label": "反馈：抑制分泌", "style": "return" },
+    { "from": "iprgc", "to": "scn", "label": "时钟基因相移", "style": "async" }
+  ]
+}

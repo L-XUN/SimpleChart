@@ -1,0 +1,43 @@
+{
+  "type": "arch",
+  "title": "订单服务架构",
+  "layers": [
+    {
+      "name": "客户端",
+      "modules": [
+        { "id": "web", "name": "Web 端", "tech": "Vue 3" },
+        { "id": "app", "name": "App 端", "tech": "Flutter" }
+      ]
+    },
+    {
+      "name": "接入层",
+      "modules": [{ "id": "gw", "name": "API 网关", "tech": "Nginx + JWT" }]
+    },
+    {
+      "name": "业务层",
+      "modules": [
+        { "id": "order", "name": "订单服务", "tech": "Spring Boot" },
+        { "id": "pay", "name": "支付服务", "tech": "Go" },
+        { "id": "stock", "name": "库存服务", "tech": "Spring Boot" }
+      ]
+    },
+    {
+      "name": "数据层",
+      "modules": [
+        { "id": "mysql", "name": "MySQL", "tech": "主从" },
+        { "id": "redis", "name": "Redis", "tech": "缓存" },
+        { "id": "mq", "name": "消息队列", "tech": "Kafka" }
+      ]
+    }
+  ],
+  "links": [
+    { "from": "web", "to": "gw", "label": "HTTPS" },
+    { "from": "app", "to": "gw", "label": "HTTPS" },
+    { "from": "gw", "to": "order", "label": "转发" },
+    { "from": "order", "to": "pay", "label": "支付" },
+    { "from": "order", "to": "stock", "label": "扣减" },
+    { "from": "order", "to": "mysql", "label": "读写" },
+    { "from": "order", "to": "redis", "label": "缓存" },
+    { "from": "pay", "to": "mq", "label": "回调" }
+  ]
+}

@@ -1,0 +1,15 @@
+# 依赖（DSH 自带，别人自己装）
+node_modules/
+
+# 渲染时的中间产物：只在本地调试用，不进仓库
+examples/**/*.svg
+
+# 系统与编辑器垃圾
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# 临时目录
+.scratch/
+tmp/

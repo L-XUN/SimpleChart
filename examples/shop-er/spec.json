@@ -1,0 +1,72 @@
+{
+  "type": "er",
+  "title": "商城订单库（核心 5 表）",
+  "perRow": 3,
+  "entities": [
+    {
+      "id": "user",
+      "name": "用户",
+      "row": 0,
+      "col": 0,
+      "fields": [
+        { "name": "id", "type": "bigint", "pk": true },
+        { "name": "nickname", "type": "varchar(32)" },
+        { "name": "phone", "type": "varchar(20)" },
+        { "name": "created_at", "type": "datetime" }
+      ]
+    },
+    {
+      "id": "address",
+      "name": "收货地址",
+      "row": 1,
+      "col": 0,
+      "fields": [
+        { "name": "id", "type": "bigint", "pk": true },
+        { "name": "user_id", "type": "bigint" },
+        { "name": "detail", "type": "varchar(128)" }
+      ]
+    },
+    {
+      "id": "order",
+      "name": "订单",
+      "row": 0,
+      "col": 1,
+      "fields": [
+        { "name": "id", "type": "bigint", "pk": true },
+        { "name": "user_id", "type": "bigint" },
+        { "name": "address_id", "type": "bigint" },
+        { "name": "amount", "type": "decimal(10,2)" },
+        { "name": "status", "type": "tinyint" }
+      ]
+    },
+    {
+      "id": "item",
+      "name": "订单明细",
+      "row": 0,
+      "col": 2,
+      "fields": [
+        { "name": "id", "type": "bigint", "pk": true },
+        { "name": "order_id", "type": "bigint" },
+        { "name": "sku_id", "type": "bigint" },
+        { "name": "qty", "type": "int" }
+      ]
+    },
+    {
+      "id": "sku",
+      "name": "商品 SKU",
+      "row": 1,
+      "col": 1,
+      "fields": [
+        { "name": "id", "type": "bigint", "pk": true },
+        { "name": "title", "type": "varchar(64)" },
+        { "name": "price", "type": "decimal(10,2)" }
+      ]
+    }
+  ],
+  "relations": [
+    { "from": "user", "to": "order", "cardinality": "1:N", "label": "下单" },
+    { "from": "user", "to": "address", "cardinality": "1:N", "label": "维护" },
+    { "from": "order", "to": "item", "cardinality": "1:N", "label": "包含" },
+    { "from": "sku", "to": "item", "cardinality": "1:N", "label": "被购买" }
+  ]
+}

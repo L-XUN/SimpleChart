@@ -1,0 +1,236 @@
+{
+  "type": "flowchart",
+  "title": "客户投诉处理流程（压力用例：20 节点）",
+  "nodes": [
+    {
+      "id": "s",
+      "shape": "start",
+      "text": "收到客户投诉",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "p1",
+      "shape": "process",
+      "text": "客服记录投诉内容、发生时间、涉及订单号与客户联系方式",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "id": "p2",
+      "shape": "process",
+      "text": "初步判断责任环节：仓储、物流、还是商品本身的质量问题",
+      "row": 2,
+      "col": 0
+    },
+    {
+      "id": "p3",
+      "shape": "process",
+      "text": "调取仓储出库记录与物流轨迹，核对时间线是否吻合",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "d1",
+      "shape": "decision",
+      "text": "是否属于我方责任？",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "id": "p4",
+      "shape": "process",
+      "text": "生成处理方案：换货、补发、退款或补偿券",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "p5",
+      "shape": "process",
+      "text": "客服主管复核方案金额是否符合授权额度",
+      "row": 6,
+      "col": 0
+    },
+    {
+      "id": "p6",
+      "shape": "process",
+      "text": "联系客户确认方案，约定履约时间",
+      "row": 7,
+      "col": 0
+    },
+    {
+      "id": "p7",
+      "shape": "process",
+      "text": "系统登记工单并跟踪履约，超时自动升级",
+      "row": 8,
+      "col": 0
+    },
+    {
+      "id": "e1",
+      "shape": "end",
+      "text": "投诉闭环",
+      "row": 9,
+      "col": 0
+    },
+    {
+      "id": "q1",
+      "shape": "process",
+      "text": "出具不属于我方责任的说明，附时间线与签收凭证",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "q2",
+      "shape": "process",
+      "text": "与承运方对账，发起理赔流程并留存沟通记录",
+      "row": 6,
+      "col": 1
+    },
+    {
+      "id": "q3",
+      "shape": "io",
+      "text": "把结论与证据回传给客户",
+      "row": 7,
+      "col": 1
+    },
+    {
+      "id": "q4",
+      "shape": "process",
+      "text": "客户不接受结论时，转人工客服二次沟通",
+      "row": 8,
+      "col": 1
+    },
+    {
+      "id": "e2",
+      "shape": "end",
+      "text": "归档并回访",
+      "row": 9,
+      "col": 1
+    },
+    {
+      "id": "r1",
+      "shape": "subprocess",
+      "text": "质量抽检复盘：同批次商品一并抽样送检",
+      "row": 6,
+      "col": 2
+    },
+    {
+      "id": "r2",
+      "shape": "process",
+      "text": "输出抽检报告，决定是否需要召回",
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "r3",
+      "shape": "process",
+      "text": "更新客诉案例库，沉淀处理话术与判断标准",
+      "row": 8,
+      "col": 2
+    },
+    {
+      "id": "r4",
+      "shape": "io",
+      "text": "向管理层提交月度客诉趋势",
+      "row": 9,
+      "col": 2
+    },
+    {
+      "id": "r5",
+      "shape": "process",
+      "text": "每季度回看一次流程卡点，调整授权额度",
+      "row": 10,
+      "col": 0
+    }
+  ],
+  "edges": [
+    {
+      "from": "s",
+      "to": "p1"
+    },
+    {
+      "from": "p1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "p3"
+    },
+    {
+      "from": "p3",
+      "to": "d1"
+    },
+    {
+      "from": "d1",
+      "to": "p4",
+      "label": "是"
+    },
+    {
+      "from": "d1",
+      "to": "q1",
+      "label": "否"
+    },
+    {
+      "from": "p4",
+      "to": "p5"
+    },
+    {
+      "from": "p5",
+      "to": "p6"
+    },
+    {
+      "from": "p6",
+      "to": "p7"
+    },
+    {
+      "from": "p7",
+      "to": "e1"
+    },
+    {
+      "from": "q1",
+      "to": "q2"
+    },
+    {
+      "from": "q2",
+      "to": "q3"
+    },
+    {
+      "from": "q3",
+      "to": "q4"
+    },
+    {
+      "from": "q4",
+      "to": "e2"
+    },
+    {
+      "from": "q2",
+      "to": "r1"
+    },
+    {
+      "from": "r1",
+      "to": "r2"
+    },
+    {
+      "from": "r2",
+      "to": "r3"
+    },
+    {
+      "from": "r3",
+      "to": "r4"
+    },
+    {
+      "from": "r4",
+      "to": "r5"
+    },
+    {
+      "from": "r5",
+      "to": "p2",
+      "label": "季度复盘"
+    },
+    {
+      "from": "q4",
+      "to": "p2",
+      "label": "升级"
+    }
+  ]
+}

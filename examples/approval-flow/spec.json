@@ -1,0 +1,25 @@
+{
+  "type": "flowchart",
+  "title": "请假审批流程",
+  "nodes": [
+    { "id": "s", "shape": "start", "text": "提交请假申请", "row": 0, "col": 0 },
+    { "id": "i1", "shape": "io", "text": "填写请假单：事由 / 天数 / 时段", "row": 1, "col": 0 },
+    { "id": "p1", "shape": "process", "text": "直属主管审批", "row": 2, "col": 0 },
+    { "id": "d1", "shape": "decision", "text": "天数 ≤ 3 天？", "row": 3, "col": 0 },
+    { "id": "p2", "shape": "process", "text": "部门负责人审批", "row": 4, "col": 1 },
+    { "id": "d2", "shape": "decision", "text": "审批通过？", "row": 5, "col": 0 },
+    { "id": "p3", "shape": "subprocess", "text": "人事备案并同步考勤", "row": 6, "col": 0 },
+    { "id": "e1", "shape": "end", "text": "结束", "row": 7, "col": 0 }
+  ],
+  "edges": [
+    { "from": "s", "to": "i1" },
+    { "from": "i1", "to": "p1" },
+    { "from": "p1", "to": "d1" },
+    { "from": "d1", "to": "d2", "label": "是" },
+    { "from": "d1", "to": "p2", "label": "否" },
+    { "from": "p2", "to": "d2" },
+    { "from": "d2", "to": "p3", "label": "是" },
+    { "from": "d2", "to": "p1", "label": "否 · 退回补充" },
+    { "from": "p3", "to": "e1" }
+  ]
+}

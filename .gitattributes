@@ -1,0 +1,4 @@
+# 统一换行符，Windows 上写的仓库在别人机器上不会变成一堆 CRLF
+* text=auto eol=lf
+*.png binary
+*.svg binary
