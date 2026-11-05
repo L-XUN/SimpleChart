@@ -40,7 +40,7 @@
 **作为 DSH skill**（推荐，`sharp`/`fontkit` 由 DSH 自带）：
 
 ```bash
-git clone https://github.com/L-XUN/simplechart.git ~/.dsh/skills/simplechart
+git clone https://github.com/L-XUN/SimpleChart.git ~/.dsh/skills/simplechart
 ```
 
 装完开新会话验证：问一句"你有哪些 skill"，或者直接打 `/simplechart 画一个三节点的流程图测试`。
@@ -50,7 +50,7 @@ git clone https://github.com/L-XUN/simplechart.git ~/.dsh/skills/simplechart
 **独立使用**（不接 agent，任意带 Node 的环境）：
 
 ```bash
-git clone https://github.com/L-XUN/simplechart.git && cd simplechart
+git clone https://github.com/L-XUN/SimpleChart.git && cd SimpleChart
 npm install                     # 装 sharp + fontkit
 node scripts/render.mjs examples/approval-flow/spec.json out.png
 ```
